@@ -3,6 +3,7 @@ package com.example.springboot_503;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.Singleton;
 import com.cloudinary.Transformation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -13,6 +14,7 @@ import java.util.Map;
 public class CloudinaryConfig {
     private Cloudinary cloudinary;
 
+    @Autowired
     public CloudinaryConfig(@Value("${cloud.key}") String key,
                             @Value("${cloud.secret}") String secret,
                             @Value("${cloud.name}") String cloud){

@@ -4,8 +4,7 @@ import com.cloudinary.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -17,12 +16,17 @@ public class HomeController {
     ActorRepository actorRepository;
     @Autowired
     CloudinaryConfig cloudc;
-
+    @RequestMapping("/")
     public String listActors(Model model){
         model.addAttribute("actors", actorRepository.findAll());
         return "list";
     }
-
+    @GetMapping("/add")
+    public String newActor(Model model){
+        model.addAttribute("actor", new Actor());
+        return "form";
+    }
+    @PostMapping("/add")
     public String processActor(@ModelAttribute Actor actor,
                                @RequestParam("file")MultipartFile file){
         if(file.isEmpty()){
